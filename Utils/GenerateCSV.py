@@ -17,14 +17,11 @@ def generate_csv(input_excel_path, target_dir):
     print("source_excel_path :" + input_excel_path)
     print("target_dir :" + target_dir)
 
-    source_excel_pd = pd.read_excel(input_excel_path, sheet_name=None)
+    source_excel_pd = pd.read_excel(input_excel_path, sheet_name='Each', header=5, usecols="C:AB")
 
-    sheet_names_list = list(source_excel_pd.keys())
+    source_excel_pd.to_csv(
+        target_dir + "/" + output_filename + "_" + ".csv", encoding="utf-8")
 
-    # No sheets to export
-    if sheet_names_list is None or sheet_names_list.__len__() == 0:
-        print("no sheets to export , function end")
-        return
-    for i in range(sheet_names_list.__len__()):
-        source_excel_pd[sheet_names_list[i]].to_csv(
-            target_dir + "/" + output_filename + "_" + sheet_names_list[i] + ".csv", encoding="utf-8")
+
+generate_csv(
+    r"D:\study\private_note\Einstein\NC01 NC Offtake by Product Line by SKU by Outlet Monthly Report    (2).xlsx", "")
